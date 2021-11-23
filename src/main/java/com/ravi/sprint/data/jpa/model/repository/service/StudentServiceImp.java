@@ -5,10 +5,7 @@ import com.ravi.sprint.data.jpa.model.entity.StudentResponse;
 import com.ravi.sprint.data.jpa.model.repository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -23,15 +20,15 @@ public class StudentServiceImp implements StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    @Autowired
-    BCryptPasswordEncoder bCryptPasswordEncoder;
+//    @Autowired
+//    BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
     public Student saveStudentDetails(Student student) {
 
-        Student student1 = student;
-        student1.setPassword(bCryptPasswordEncoder.encode(student1.getPassword()));
-        return studentRepository.save(student1);
+     //   Student student1 = student;
+      //  student1.setPassword(bCryptPasswordEncoder.encode(student1.getPassword()));
+        return studentRepository.save(student);
     }
 
     @Override
@@ -61,16 +58,16 @@ public class StudentServiceImp implements StudentService {
         return studentResponse;
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        log.info(s);
-        Student student = studentRepository.findByEmailNative(s);
-        if (student == null) {
-            throw new UsernameNotFoundException(s);
-        }
-
-
-
-        return new User(student.getEmailId(),student.getPassword(),new ArrayList<>());
-    }
+//    @Override
+//    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+//        log.info(s);
+//        Student student = studentRepository.findByEmailNative(s);
+//        if (student == null) {
+//            throw new UsernameNotFoundException(s);
+//        }
+//
+//
+//
+//        return new User(student.getEmailId(),student.getPassword(),new ArrayList<>());
+//    }
 }
